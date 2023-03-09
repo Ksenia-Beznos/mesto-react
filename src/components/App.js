@@ -13,12 +13,13 @@ function App() {
 			<Main />
 			<Footer />
 
-			<PopupWithForm title='Редактировать профиль' name='profile' />
-			<PopupWithForm title='Новое место' name='cards' />
-			<PopupWithForm title='Обновить аватар' name='avatar' />
-			<PopupWithForm title='Вы уверены?' name='cards-delete' />
+			<PopupWithForm title='Редактировать профиль' name='profile' children='Сохранить' />
+			<PopupWithForm title='Новое место' name='cards' children='Создать' />
+			<PopupWithForm title='Обновить аватар' name='avatar' children='Сохранить'/>
+			<PopupWithForm title='Вы уверены?' name='cards-delete' children='Да'/>
 
 			<ImagePopup />
+			
 			{/* Section popup Profile */}
 			{/* <div className='popup popup_type_profile'>
 				<div className='popup__container'>
@@ -57,6 +58,8 @@ function App() {
 					</form>
 				</div>
 			</div> */}
+
+
 			{/* Section popup Card */}
 			{/* <div className='popup popup_type_cards'>
 				<div className='popup__container'>
@@ -94,6 +97,8 @@ function App() {
 				</div>
 			</div>
 			 */}
+
+
 			{/* Section popup Card Confirm Delete */}
 			{/* <div className='popup popup_type_cards-delete'>
 				<div className='popup__container'>
@@ -106,6 +111,8 @@ function App() {
 					</form>
 				</div>
 			</div> */}
+
+
 			{/* Section popup Avatar */}
 			{/* <div className='popup popup_type_avatar'>
 				<div className='popup__container'>
@@ -132,6 +139,7 @@ function App() {
 					</form>
 				</div>
 			</div> */}
+
 			{/* Section Template Owner */}
 			<template id='template-element-owner'>
 				<li className='element__item'>

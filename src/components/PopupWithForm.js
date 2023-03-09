@@ -2,6 +2,13 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 function PopupWithForm(props) {
+  // const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+
+  // function handleEditProfileClick() {
+  //   setIsEditProfilePopupOpen(true)
+  // }
+
+  return (
 	<div className={`popup popup_type_${props.name}`}>
 		<div className='popup__container'>
 			<button
@@ -12,7 +19,7 @@ function PopupWithForm(props) {
 			<h2 className='popup__heading'>{props.title}</h2>
 
 			<form className={`popup__form popup__form_type_${props.name}}`} name={props.name} noValidate>
-						{/* <input
+						<input
 							id='name-input'
 							className='popup__input popup__input_type_name'
 							type='text'
@@ -35,11 +42,12 @@ function PopupWithForm(props) {
 						/>
 						<span className='text-input-error popup__input-error'></span>
 						<button className='popup__submit-button' type='submit' aria-label='Сохранить'>
-							Сохранить
-						</button> */}
+							{props.children}
+						</button>
 					</form>
 		</div>
-	</div>;
+	</div>
+  )
 }
 
 export default PopupWithForm;
