@@ -1,7 +1,12 @@
 import React from 'react';
 import avatar from '../images/avatar.jpg';
+import { api } from '../utils/api';
 
 function Main(props) {
+	const [userName, setUserName] = React.useState('');
+	const [userDescription, setUserDescription] = React.useState('');
+	const [userAvatar, setUserAvatar] = React.useState('');
+
 
 	return (
 		<main className='content'>
