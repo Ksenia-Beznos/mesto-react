@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import Logo from '../images/Logo.svg';
 
 function Header() {

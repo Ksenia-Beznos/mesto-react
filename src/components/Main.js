@@ -1,19 +1,7 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import avatar from '../images/avatar.jpg';
 
-function Main() {
-	function handleEditAvatarClick() {
-		document.querySelector('.popup_type_avatar').classList.add('popup_opened');
-	}
-
-	function handleEditProfileClick() {
-		document.querySelector('.popup_type_profile').classList.add('popup_opened');
-	}
-
-	function handleAddPlaceClick() {
-    document.querySelector('.popup_type_cards').classList.add('popup_opened');
-  }
+function Main(props) {
 
 	return (
 		<main className='content'>
@@ -24,7 +12,7 @@ function Main() {
 						className='profile__avatar-button'
 						type='button'
 						aria-label='Изменить аватар'
-						onClick={handleEditAvatarClick}
+						onClick={props.onEditAvatar}
 					>
 						<img className='profile__avatar' src={avatar} alt='Аватар' />
 					</button>
@@ -37,14 +25,14 @@ function Main() {
 							className='profile__edit-button'
 							type='button'
 							aria-label='Изменить'
-							onClick={handleEditProfileClick}
+							onClick={props.onEditProfile}
 						></button>
 					</div>
 					<button
 						className='profile__add-button'
 						type='button'
 						aria-label='Добавить'
-						onClick={handleAddPlaceClick}
+						onClick={props.onAddPlace}
 					></button>
 				</div>
 			</section>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 
 function ImagePopup() {
   <div className='popup popup_type_image'>
