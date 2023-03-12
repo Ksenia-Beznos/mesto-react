@@ -1,12 +1,34 @@
-import React from 'react';
-import avatar from '../images/avatar.jpg';
+import { useEffect, useState } from 'react';
 import { api } from '../utils/api';
+import Card from './Card';
 
 function Main(props) {
-	const [userName, setUserName] = React.useState('');
-	const [userDescription, setUserDescription] = React.useState('');
-	const [userAvatar, setUserAvatar] = React.useState('');
+	const [userName, setUserName] = useState('');
+	const [userDescription, setUserDescription] = useState('');
+	const [userAvatar, setUserAvatar] = useState('');
+	const [cards, setCards] = useState([]);
 
+	useEffect(() => {
+		api
+			.getInitialCards()
+			.then((res) => {
+				setCards(res);
+			})
+			.catch((err) => console.log(err));
+	}, []
+	);
+
+	useEffect(() => {
+		api
+			.getUserInfo()
+			.then((res) => {
+				const currentUser = res;
+				setUserName(currentUser.name);
+				setUserDescription(currentUser.about);
+				setUserAvatar(currentUser.avatar);
+			})
+			.catch((err) => console.log(err));
+	}, []);
 
 	return (
 		<main className='content'>
@@ -19,13 +41,13 @@ function Main(props) {
 						aria-label='Изменить аватар'
 						onClick={props.onEditAvatar}
 					>
-						<img className='profile__avatar' src={avatar} alt='Аватар' />
+						<img className='profile__avatar' src={userAvatar} alt='Аватар' />
 					</button>
 				</div>
 				<div className='profile__container'>
 					<div className='profile__info'>
-						<h1 className='profile__title'>Жак-Ив Кусто</h1>
-						<p className='profile__subtitle'>Исследователь</p>
+						<h1 className='profile__title'>{userName}</h1>
+						<p className='profile__subtitle'>{userDescription}</p>
 						<button
 							className='profile__edit-button'
 							type='button'
@@ -44,7 +66,13 @@ function Main(props) {
 
 			{/* Section Card */}
 			<section className='elements'>
-				<ul className='element'></ul>
+				<ul className='element'> 
+				{
+					cards.map((card) => {
+						return <Card key={card._id} card={card} onCardClick={props.onOpenImagePopup} />;
+					})
+				}
+				</ul>
 			</section>
 		</main>
 	);

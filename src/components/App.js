@@ -5,25 +5,46 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 
-
 function App() {
 	const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
 	const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 	const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+	const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
+
+	const [selectedCard, setSelectedCard] = React.useState({});
+
+	const handleCardClick = (card) => {
+		setSelectedCard(card);
+		setIsImagePopupOpen(true);
+	};
+
+	const handleEditProfileClick = () => {
+		setIsEditProfilePopupOpen(true);
+	};
+
+	const handleEditAvatarClick = () => {
+		setIsEditAvatarPopupOpen(true);
+	};
+
+	const handleAddPlaceClick = () => {
+		setIsAddPlacePopupOpen(true);
+	};
 
 	function closeAllPopups() {
 		setIsEditProfilePopupOpen(false);
 		setIsEditAvatarPopupOpen(false);
 		setIsAddPlacePopupOpen(false);
+		setIsImagePopupOpen(false);
 	}
 
 	return (
 		<div className='page'>
 			<Header />
 			<Main
-				onEditProfile={setIsEditProfilePopupOpen}
-				onAddPlace={setIsAddPlacePopupOpen}
-				onEditAvatar={setIsEditAvatarPopupOpen}
+				onEditProfile={handleEditProfileClick}
+				onAddPlace={handleAddPlaceClick}
+				onEditAvatar={handleEditAvatarClick}
+				onOpenImagePopup={handleCardClick}
 			/>
 
 			<Footer />
@@ -115,35 +136,7 @@ function App() {
 			{/* Форма Delete-card */}
 			<PopupWithForm title='Вы уверены?' name='cards-delete' button='Да' label='Да' />
 
-			<ImagePopup />
-
-			{/* Section Template Owner */}
-			<template id='template-element-owner'>
-				<li className='element__item'>
-					<img className='element__image' />
-					<div className='element__mask-group'>
-						<h2 className='element__title'></h2>
-						<div className='element__heart-button-group'>
-							<button className='element__heart-button' type='button'></button>
-							<span className='element__heart-button-count'>0</span>
-						</div>
-						<button className='element__trash-button' type='button'></button>
-					</div>
-				</li>
-			</template>
-			{/* Section Template User */}
-			<template id='template-element'>
-				<li className='element__item'>
-					<img className='element__image' />
-					<div className='element__mask-group'>
-						<h2 className='element__title'></h2>
-						<div className='element__heart-button-group'>
-							<button className='element__heart-button' type='button'></button>
-							<span className='element__heart-button-count'>0</span>
-						</div>
-					</div>
-				</li>
-			</template>
+			<ImagePopup isOpen={isImagePopupOpen} onClose={closeAllPopups} card={selectedCard} />
 		</div>
 	);
 }
