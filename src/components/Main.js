@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../utils/api';
 import Card from './Card';
 
-function Main(props) {
+function Main({ onEditAvatar, onEditProfile, onAddPlace, onOpenImagePopup }) {
 	const [userName, setUserName] = useState('');
 	const [userDescription, setUserDescription] = useState('');
 	const [userAvatar, setUserAvatar] = useState('');
@@ -15,8 +15,7 @@ function Main(props) {
 				setCards(res);
 			})
 			.catch((err) => console.log(err));
-	}, []
-	);
+	}, []);
 
 	useEffect(() => {
 		api
@@ -35,12 +34,7 @@ function Main(props) {
 			{/* Section Profile */}
 			<section className='profile'>
 				<div className='profile__avatar-outside'>
-					<button
-						className='profile__avatar-button'
-						type='button'
-						aria-label='Изменить аватар'
-						onClick={props.onEditAvatar}
-					>
+					<button className='profile__avatar-button' type='button' aria-label='Изменить аватар' onClick={onEditAvatar}>
 						<img className='profile__avatar' src={userAvatar} alt='Аватар' />
 					</button>
 				</div>
@@ -52,26 +46,19 @@ function Main(props) {
 							className='profile__edit-button'
 							type='button'
 							aria-label='Изменить'
-							onClick={props.onEditProfile}
+							onClick={onEditProfile}
 						></button>
 					</div>
-					<button
-						className='profile__add-button'
-						type='button'
-						aria-label='Добавить'
-						onClick={props.onAddPlace}
-					></button>
+					<button className='profile__add-button' type='button' aria-label='Добавить' onClick={onAddPlace}></button>
 				</div>
 			</section>
 
 			{/* Section Card */}
 			<section className='elements'>
-				<ul className='element'> 
-				{
-					cards.map((card) => {
-						return <Card key={card._id} card={card} onCardClick={props.onOpenImagePopup} />;
-					})
-				}
+				<ul className='element'>
+					{cards.map((card) => {
+						return <Card key={card._id} card={card} onCardClick={onOpenImagePopup} />;
+					})}
 				</ul>
 			</section>
 		</main>

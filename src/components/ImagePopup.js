@@ -9,7 +9,7 @@ function ImagePopup(props) {
 					type='button'
 					aria-label='Закрыть'
 					onClick={props.onClose}
-				></button>
+				/>
 			</figure>
 		</div>
 	);

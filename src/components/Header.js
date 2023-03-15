@@ -1,9 +1,9 @@
-import Logo from '../images/Logo.svg';
+import logo from '../images/logo.svg';
 
 function Header() {
   return (
 		<header className='header'>
-			<img className='header__logo' src={Logo} alt='Логотип Mesto' />
+			<img className='header__logo' src={logo} alt='Логотип Mesto' />
 		</header>
 	);
 }
