@@ -1,33 +1,9 @@
-import { useEffect, useState } from 'react';
-import { api } from '../utils/api';
+import { useContext } from 'react';
 import Card from './Card';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function Main({ onEditAvatar, onEditProfile, onAddPlace, onOpenImagePopup }) {
-	const [userName, setUserName] = useState('');
-	const [userDescription, setUserDescription] = useState('');
-	const [userAvatar, setUserAvatar] = useState('');
-	const [cards, setCards] = useState([]);
-
-	useEffect(() => {
-		api
-			.getInitialCards()
-			.then((res) => {
-				setCards(res);
-			})
-			.catch((err) => console.log(err));
-	}, []);
-
-	useEffect(() => {
-		api
-			.getUserInfo()
-			.then((res) => {
-				const currentUser = res;
-				setUserName(currentUser.name);
-				setUserDescription(currentUser.about);
-				setUserAvatar(currentUser.avatar);
-			})
-			.catch((err) => console.log(err));
-	}, []);
+function Main({ onEditAvatar, onEditProfile, onAddPlace, onOpenImagePopup, onDeleteCard, onCardLike, cards }) {
+	const currentUser = useContext(CurrentUserContext);
 
 	return (
 		<main className='content'>
@@ -35,13 +11,13 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onOpenImagePopup }) {
 			<section className='profile'>
 				<div className='profile__avatar-outside'>
 					<button className='profile__avatar-button' type='button' aria-label='Изменить аватар' onClick={onEditAvatar}>
-						<img className='profile__avatar' src={userAvatar} alt='Аватар' />
+						<img className='profile__avatar' src={currentUser.avatar} alt='Аватар' />
 					</button>
 				</div>
 				<div className='profile__container'>
 					<div className='profile__info'>
-						<h1 className='profile__title'>{userName}</h1>
-						<p className='profile__subtitle'>{userDescription}</p>
+						<h1 className='profile__title'>{currentUser.name}</h1>
+						<p className='profile__subtitle'>{currentUser.about}</p>
 						<button
 							className='profile__edit-button'
 							type='button'
@@ -57,7 +33,15 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onOpenImagePopup }) {
 			<section className='elements'>
 				<ul className='element'>
 					{cards.map((card) => {
-						return <Card key={card._id} card={card} onCardClick={onOpenImagePopup} />;
+						return (
+							<Card
+								key={card._id}
+								card={card}
+								onCardClick={onOpenImagePopup}
+								onDeleteCard={onDeleteCard}
+								onCardLike={onCardLike}
+							/>
+						);
 					})}
 				</ul>
 			</section>
