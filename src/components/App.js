@@ -6,6 +6,8 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 
 function App() {
 	const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -14,6 +16,7 @@ function App() {
 	const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
 
 	const [currentUser, setCurrentUser] = useState('');
+
 	useEffect(() => {
 		api
 			.getUserInfo()
@@ -62,7 +65,7 @@ function App() {
 
 	function handleCardLike(card) {
 		// Снова проверяем, есть ли уже лайк на этой карточке
-		console.log(card)
+		console.log(card);
 		const isLiked = card.likes.some((i) => i._id === currentUser._id);
 		// Отправляем запрос в API и получаем обновлённые данные карточки
 		api
@@ -83,6 +86,27 @@ function App() {
 			.catch((err) => console.log(err));
 	}
 
+	function handleUpdateUser({ name, about }) {
+		api
+			.setUserInfo(name, about)
+			.then((res) => {
+				setCurrentUser(res);
+			})
+			.catch((err) => console.log(err))
+			.finally(() => closeAllPopups());
+	}
+
+	function handleUpdateAvatar({ avatar }) {
+		console.log(avatar);
+		api
+			.setAvatar(avatar)
+			.then((res) => {
+				setCurrentUser(res);
+			})
+			.catch((err) => console.log(err))
+			.finally(() => closeAllPopups());
+	}
+
 	return (
 		<CurrentUserContext.Provider value={currentUser}>
 			<div className='page'>
@@ -100,37 +124,13 @@ function App() {
 				<Footer />
 
 				{/* Форма Profile */}
-				<PopupWithForm
-					title='Редактировать профиль'
-					name='profile'
-					button='Сохранить'
-					label='Сохранить'
-					isOpen={isEditProfilePopupOpen}
-					onClose={closeAllPopups}
-				>
-					<input
-						id='name-input'
-						className='popup__input popup__input_type_name'
-						type='text'
-						name='nameInput'
-						placeholder='Имя'
-						required
-						minLength='2'
-						maxLength='40'
-					/>
-					<span className='name-input-error popup__input-error'></span>
-					<input
-						id='text-input'
-						className='popup__input popup__input_type_job'
-						type='text'
-						name='jobInput'
-						placeholder='О себе'
-						required
-						minLength='2'
-						maxLength='200'
-					/>
-					<span className='text-input-error popup__input-error'></span>
-				</PopupWithForm>
+				<EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
+
+				{/* Форма Avatar */}
+				<EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
+
+				{/* Форма Delete-card */}
+				<PopupWithForm title='Вы уверены?' name='cards-delete' button='Да' label='Да' />
 
 				{/* Форма Cards */}
 				<PopupWithForm
@@ -162,29 +162,6 @@ function App() {
 					/>
 					<span className='link-input-error popup__input-error'></span>
 				</PopupWithForm>
-
-				{/* Форма Avatar */}
-				<PopupWithForm
-					title='Обновить аватар'
-					name='avatar'
-					button='Сохранить'
-					label='Сохранить'
-					isOpen={isEditAvatarPopupOpen}
-					onClose={closeAllPopups}
-				>
-					<input
-						id='link-input-avatar'
-						className='popup__input popup__input_type_link'
-						type='url'
-						name='linkInputAvatar'
-						placeholder='Ссылка на картинку'
-						required
-					/>
-					<span className='link-input-avatar-error popup__input-error'></span>
-				</PopupWithForm>
-
-				{/* Форма Delete-card */}
-				<PopupWithForm title='Вы уверены?' name='cards-delete' button='Да' label='Да' />
 
 				<ImagePopup isOpen={isImagePopupOpen} onClose={closeAllPopups} card={selectedCard} />
 			</div>
