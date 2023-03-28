@@ -89,9 +89,9 @@ function App() {
 			.then(() => {
 				const newCards = cards.filter((element) => (element._id !== card._id ? element : ''));
 				setCards(newCards);
+				closeAllPopups();
 			})
-			.catch((err) => console.log(err))
-			.finally(() => closeAllPopups());
+			.catch((err) => console.log(err));
 	}
 
 	function handleCardDelete(card) {
@@ -104,9 +104,9 @@ function App() {
 			.setUserInfo(name, about)
 			.then((res) => {
 				setCurrentUser(res);
+				closeAllPopups();
 			})
-			.catch((err) => console.log(err))
-			.finally(() => closeAllPopups());
+			.catch((err) => console.log(err));
 	}
 
 	function handleUpdateAvatar({ avatar }) {
@@ -114,9 +114,9 @@ function App() {
 			.setAvatar(avatar)
 			.then((res) => {
 				setCurrentUser(res);
+				closeAllPopups();
 			})
-			.catch((err) => console.log(err))
-			.finally(() => closeAllPopups());
+			.catch((err) => console.log(err));
 	}
 
 	function handleAddPlace(card) {
@@ -124,9 +124,9 @@ function App() {
 			.addCard(card)
 			.then((res) => {
 				setCards([res, ...cards]);
+				closeAllPopups();
 			})
-			.catch((err) => console.log(err))
-			.finally(() => closeAllPopups());
+			.catch((err) => console.log(err));
 	}
 
 	return (
