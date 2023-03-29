@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Ksenia-Beznos/mesto-react/static/css/main.52d28cb7.css",
-    "main.js": "/Ksenia-Beznos/mesto-react/static/js/main.a7889d70.js",
+    "main.css": "/Ksenia-Beznos/mesto-react/static/css/main.43717a44.css",
+    "main.js": "/Ksenia-Beznos/mesto-react/static/js/main.ee4d0b8f.js",
     "static/js/787.5530211c.chunk.js": "/Ksenia-Beznos/mesto-react/static/js/787.5530211c.chunk.js",
     "static/media/Inter-Medium.woff": "/Ksenia-Beznos/mesto-react/static/media/Inter-Medium.9053572c46aeb4b16caa.woff",
     "static/media/Inter-Black.woff": "/Ksenia-Beznos/mesto-react/static/media/Inter-Black.c6938660eec019fefd68.woff",
@@ -20,12 +20,12 @@
     "static/media/Edit-Button.svg": "/Ksenia-Beznos/mesto-react/static/media/Edit-Button.a1892ea72cb87c8fc3aa.svg",
     "static/media/Close-Icon.svg": "/Ksenia-Beznos/mesto-react/static/media/Close-Icon.2ceb783afbab75916ddc.svg",
     "static/media/Close-Icon_for_320.svg": "/Ksenia-Beznos/mesto-react/static/media/Close-Icon_for_320.b793e07c3f4c19e26c11.svg",
-    "main.52d28cb7.css.map": "/Ksenia-Beznos/mesto-react/static/css/main.52d28cb7.css.map",
-    "main.a7889d70.js.map": "/Ksenia-Beznos/mesto-react/static/js/main.a7889d70.js.map",
+    "main.43717a44.css.map": "/Ksenia-Beznos/mesto-react/static/css/main.43717a44.css.map",
+    "main.ee4d0b8f.js.map": "/Ksenia-Beznos/mesto-react/static/js/main.ee4d0b8f.js.map",
     "787.5530211c.chunk.js.map": "/Ksenia-Beznos/mesto-react/static/js/787.5530211c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.52d28cb7.css",
-    "static/js/main.a7889d70.js"
+    "static/css/main.43717a44.css",
+    "static/js/main.ee4d0b8f.js"
   ]
 }
