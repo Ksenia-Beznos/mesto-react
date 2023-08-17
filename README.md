@@ -44,11 +44,8 @@ Mesto - это компактная интеррактивная страниц�
 `git@github.com:Ksenia-Beznos/mesto-react.git`
 2. Установите зависимости:
 `npm install`
-3. Соберите проект:
-`npm run build`
-4. Запустите проект:
-`npm run dev`
-
+3. Запустите проект:
+`npm run start`
 
 ### **Макеты этапов проекта**
 [1 этап](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?type=design&node-id=0-1&mode=design)
